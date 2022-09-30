@@ -20,9 +20,11 @@ app.all(
   async (req: express.Request<{}, {}, {}, { uri: string }>, res, next) => {
     try {
       if (req.query.uri) {
+        const { uri,...params} = req.query
         try {
           const response = await axios.request({
             url: req.query.uri,
+            params,
             method: req.method as Method,
             data: req.body,
             headers: { ...(req.headers.authorization ? { authorization: req.headers.authorization } : {}), accept: req.headers?.accept ?? 'text/turtle' },
