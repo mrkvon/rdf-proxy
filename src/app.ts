@@ -13,7 +13,7 @@ const port = 3001
 
 app.use(helmet())
 app.use(cors())
-app.use(json())
+app.use(json({ limit: '100MB'}))
 
 app.all(
   '/',
